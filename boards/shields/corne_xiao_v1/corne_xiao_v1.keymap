@@ -60,6 +60,17 @@
             tapping-term-ms = <200>;
             bindings = <&kp>, <&kp>;
         };
+
+        /* Use for Backspace: Tap = BSPC, Hold = Layer, Quick-Tap = Repeat BSPC */
+        lt_bspc: layer_tap_backspace {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_BACKSPACE";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     combos {
@@ -67,18 +78,16 @@
         
         /* A + O = 英数 (Layer 0のみ) */
         combo_eisu {
-            timeout-ms = <50>;
+            timeout-ms = <100>;
             key-positions = <13 14>;
             bindings = <&kp JP_EISU>;
-            layers = <BASE>;
         };
         
         /* T + N = かな (Layer 0のみ) */
         combo_kana {
-            timeout-ms = <50>;
+            timeout-ms = <100>;
             key-positions = <17 18>;
             bindings = <&kp JP_KANA>;
-            layers = <BASE>;
         };
 
         /* C + V + D + M = Gaming Layer Toggle */
@@ -110,7 +119,7 @@
 /* TOP */  &kp LGUI    &kp L      &kp U       &kp F       &kp COMMA      &kp DOT      &kp W       &kp R       &kp Y        &none
 /* MID */  &kp Q       &kp E      &kp I       &hm LALT A  &hm LSHIFT O   &kp MINUS    &kp K       &hm RSHIFT T &hm RALT N  &kp S     &kp H     &kp P
 /* BOT */  &none       &kp Z      &kp X       &kp C       &kp V          &none        &kp G       &kp D       &kp M        &kp J     &kp B     &none
-/* THUMB */            &mt_thumb LCTRL RET    &lt LOWER BSPC  &lt MOUSE F15      &none        &lt RAISE SPACE  &mt_thumb RCTRL TAB
+/* THUMB */            &mt_thumb LCTRL RET    &lt_bspc LOWER BSPC  &lt MOUSE F15      &none        &lt RAISE SPACE  &mt_thumb RCTRL TAB
             >;
         };
 
