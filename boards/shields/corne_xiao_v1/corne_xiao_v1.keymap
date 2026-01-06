@@ -19,8 +19,8 @@
 #define JP_RPAREN       LEFT_PARENTHESIS  // )
 #define JP_LBRACE       RIGHT_BRACE       // {
 #define JP_RBRACE       PIPE              // }
-#define JP_KANA         LANGUAGE_1        // かな
-#define JP_EISU         LANGUAGE_2        // 英数
+#define JP_KANA         INT_HENKAN        // かな
+#define JP_EISU         INT_MUHENKAN      // 英数
 #define JP_HANZEN       GRAVE             // 半角/全角
 
 #include <behaviors.dtsi>
