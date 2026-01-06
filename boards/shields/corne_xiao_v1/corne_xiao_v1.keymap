@@ -78,14 +78,14 @@
         
         /* A + O = 英数 (Layer 0のみ) */
         combo_eisu {
-            timeout-ms = <100>;
+            timeout-ms = <150>;
             key-positions = <13 14>;
             bindings = <&kp JP_EISU>;
         };
         
         /* T + N = かな (Layer 0のみ) */
         combo_kana {
-            timeout-ms = <100>;
+            timeout-ms = <150>;
             key-positions = <17 18>;
             bindings = <&kp JP_KANA>;
         };
