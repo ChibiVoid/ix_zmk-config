@@ -37,6 +37,12 @@
 #define GAME 5
 #define GAME2 6
 
+&kscan0 {
+    debounce-press-ms = <10>;
+    debounce-release-ms = <10>;
+};
+
+
 / {
     /* Home Row Mods の設定 */
     behaviors {
