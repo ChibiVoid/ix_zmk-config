@@ -3,6 +3,16 @@ if SHIELD_CORNE_XIAO_V1_LEFT
 config ZMK_KEYBOARD_NAME
     default "Corne"
 
+# 左側を子機にする
+config ZMK_SPLIT_ROLE_CENTRAL
+    default n
+
+endif
+
+# 右側の設定ブロックを追加
+if SHIELD_CORNE_XIAO_V1_RIGHT
+
+# 右側を親機にする
 config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
