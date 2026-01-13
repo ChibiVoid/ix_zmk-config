@@ -40,15 +40,46 @@
 / {
     /* Home Row Mods の設定 */
     behaviors {
-        hm: homerow_mods {
+        /*
+         * Left Hand Keys:
+         * 0  1  2  3  4
+         * 10 11 12 13 14 15
+         * 22 23 24 25 26 27
+         * 34 35 36 (Thumbs)
+         */
+        
+        /*
+         * Right Hand Keys:
+         * 5  6  7  8  9
+         * 16 17 18 19 20 21
+         * 28 29 30 31 32 33
+         * 37 38 39 (Thumbs)
+         */
+
+        hm_l: homerow_mods_left {
             compatible = "zmk,behavior-hold-tap";
-            label = "HOMEROW_MODS";
+            label = "HOMEROW_MODS_LEFT";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <200>;
-            quick-tap-ms = <175>;                // タイピングが速い場合の誤爆防止
-            require-prior-idle-ms = <150>;       // 直前のキー入力から時間が経っていないとMod判定しない
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            display-name = "Left_HRM"; // Add display-name for Studio (optional)
             bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <5 6 7 8 9 16 17 18 19 20 21 28 29 30 31 32 33 34 35 36 37 38 39>; // Right keys + All Thumbs
+        };
+
+        hm_r: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_RIGHT";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            display-name = "Right_HRM";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 15 22 23 24 25 26 27 34 35 36 37 38 39>; // Left keys + All Thumbs
         };
         
         /* 親指用 Mod-Tap (Ctrl/Tab, Ctrl/Enter) */
@@ -69,6 +100,17 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
+
+        /* Improved Layer-Tap for Arrows (Raise/Space) */
+        lt_raise: layer_tap_raise {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LAYER_TAP_RAISE";
+            #binding-cells = <2>;
+            flavor = "balanced";                 // Balanced for easier activation of layer
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
             bindings = <&mo>, <&kp>;
         };
     };
@@ -117,9 +159,9 @@
             display-name = "Base";
             bindings = <
 /* TOP */  &kp LGUI    &kp L      &kp U       &kp F       &kp COMMA      &kp DOT      &kp W       &kp R       &kp Y        &none
-/* MID */  &kp Q       &kp E      &kp I       &hm LALT A  &hm LSHIFT O   &kp MINUS    &kp K       &hm RSHIFT T &hm RALT N  &kp S     &kp H     &kp P
+/* MID */  &kp Q       &kp E      &kp I       &hm_l LALT A &hm_l LSHIFT O  &kp MINUS    &kp K       &hm_r RSHIFT T &hm_r RALT N  &kp S     &kp H     &kp P
 /* BOT */  &none       &kp Z      &kp X       &kp C       &kp V          &none        &kp G       &kp D       &kp M        &kp J     &kp B     &none
-/* THUMB */            &mt_thumb LCTRL RET    &lt_bspc LOWER BSPC  &lt MOUSE F15      &none        &lt RAISE SPACE  &mt_thumb RCTRL TAB
+/* THUMB */            &mt_thumb LCTRL RET    &lt_bspc LOWER BSPC  &lt MOUSE F15      &none        &lt_raise RAISE SPACE  &mt_thumb RCTRL TAB
             >;
         };
 
@@ -150,7 +192,7 @@
             display-name = "Adjust";
             bindings = <
 /* TOP */  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3   &none          &kp INS      &kp HOME     &kp PG_UP     &none
-/* MID */  &none       &none           &none         &none           &none          &bt BT_SEL 4 &none        &kp DEL      &kp END   &kp K_APP &none  &none
+/* MID */  &none       &none           &none         &none           &none          &bt BT_SEL 4 &none        &kp DEL      &kp END   &kp PG_DN &none  &none
 /* BOT */  &kp F1      &kp F2          &kp F3        &kp F4          &kp F5         &kp F6       &kp F7       &kp F8       &kp F9    &kp F10   &kp F11 &kp F12
 /* THUMB */            &trans                 &trans          &trans          &trans       &trans           &trans
             >;
