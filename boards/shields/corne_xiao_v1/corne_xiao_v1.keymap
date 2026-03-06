@@ -30,12 +30,16 @@
 
 /* レイヤー定義 */
 #define BASE 0
-#define LOWER 1
-#define RAISE 2
-#define ADJUST 3
-#define MOUSE 4
-#define GAME 5
-#define GAME2 6
+#define MAC_BASE 1
+#define LOWER 2
+#define RAISE 3
+#define US_TOGGLE 4
+#define US_LOWER 5
+#define US_RAISE 6
+#define ADJUST 7
+#define MOUSE 8
+#define GAME 9
+#define GAME2 10
 
 / {
     /* Home Row Mods の設定 */
@@ -138,13 +142,24 @@
             timeout-ms = <50>;
             key-positions = <25 26 29 30>;
             bindings = <&tog GAME>;
-            layers = <BASE GAME>;
+            layers = <BASE MAC_BASE GAME>;
         };
     };
 
-    /* Conditional Layer: Lower(1) + Raise(2) = Adjust(3) */
+    /* Conditional Layer: Lower + Raise = Adjust, plus US overrides */
     conditional_layers {
         compatible = "zmk,conditional-layers";
+
+        us_lower_cond {
+            if-layers = <LOWER US_TOGGLE>;
+            then-layer = <US_LOWER>;
+        };
+        
+        us_raise_cond {
+            if-layers = <RAISE US_TOGGLE>;
+            then-layer = <US_RAISE>;
+        };
+
         tri_layer {
             if-layers = <LOWER RAISE>;
             then-layer = <ADJUST>;
@@ -165,40 +180,84 @@
             >;
         };
 
-        /* Layer 1: Lower (Backspace hold) */
+        /* Layer 1: Mac Base (Overlay for modifiers) */
+        mac_base_layer {
+            display-name = "MacBase";
+            bindings = <
+/* TOP */  &kp LCTRL   &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans
+/* MID */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans    &trans    &trans
+/* BOT */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans    &trans    &trans
+/* THUMB */            &mt_thumb LGUI RET     &trans      &trans         &trans       &trans      &mt_thumb RGUI TAB
+            >;
+        };
+
+        /* Layer 2: Lower (Backspace hold) */
         lower_layer {
             display-name = "Lower";
             bindings = <
-/* TOP */  &kp LGUI    &kp N1     &kp N2      &kp N3      &none          &none        &kp LESS_THAN &kp JP_EQUAL  &kp GREATER_THAN &none
+/* TOP */  &trans      &kp N1     &kp N2      &kp N3      &none          &none        &kp LESS_THAN &kp JP_EQUAL  &kp GREATER_THAN &none
 /* MID */  &kp JP_TILDE &kp N0    &kp N4      &kp N5      &kp N6         &none        &kp JP_CARET  &kp JP_PLUS &kp MINUS    &kp JP_ASTERISK &kp FSLH &kp PRCNT
 /* BOT */  &none       &kp DOLLAR &kp N7      &kp N8      &kp N9         &none        &kp JP_UNDERSCORE &kp EXCL &kp QMARK   &kp JP_COLON  &kp SEMI &none
 /* THUMB */            &trans                 &trans      &trans             &trans       &trans          &trans
             >;
         };
 
-        /* Layer 2: Raise (Space hold) */
+        /* Layer 3: Raise (Space hold) */
         raise_layer {
             display-name = "Raise";
             bindings = <
-/* TOP */  &kp LGUI    &kp JP_LBRACKET &kp JP_DQUOTE &kp JP_RBRACKET &kp JP_PIPE  &none        &kp ESC      &kp UP       &kp CAPSLOCK    &none
+/* TOP */  &trans      &kp JP_LBRACKET &kp JP_DQUOTE &kp JP_RBRACKET &kp JP_PIPE  &none        &kp ESC      &kp UP       &kp CAPSLOCK    &none
 /* MID */  &kp JP_AT   &kp HASH        &kp JP_LPAREN &kp JP_QUOTE    &kp JP_RPAREN &kp JP_AMPERSAND &kp C_VOL_UP &kp LEFT     &kp DOWN        &kp RIGHT &kp C_BRI_UP &kp PSCRN
 /* BOT */  &none       &kp JP_YEN      &kp JP_LBRACE &kp JP_BACKQUOTE &kp JP_RBRACE &none        &kp C_VOL_DN &kp C_PREV   &kp C_PP        &kp C_NEXT &kp C_BRI_DN &none
 /* THUMB */            &trans                 &trans          &trans          &trans       &trans           &trans
             >;
         };
 
-        /* Layer 3: Adjust (Back + Space hold) */
+        /* Layer 4: US Toggle (Dummy state tracking) */
+        us_toggle_layer {
+            display-name = "US_Mode";
+            bindings = <
+/* TOP */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans
+/* MID */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans    &trans    &trans
+/* BOT */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans    &trans    &trans
+/* THUMB */            &trans                 &trans      &trans             &trans       &trans          &trans
+            >;
+        };
+
+        /* Layer 5: US Lower */
+        us_lower_layer {
+            display-name = "US_Lower";
+            bindings = <
+/* TOP */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &kp EQUAL   &trans       &trans
+/* MID */  &kp TILDE   &trans     &trans      &trans      &trans         &trans       &kp CARET   &kp PLUS    &trans       &kp ASTERISK &trans    &trans
+/* BOT */  &trans      &trans     &trans      &trans      &trans         &trans       &kp UNDER   &trans      &trans       &kp COLON    &trans    &trans
+/* THUMB */            &trans                 &trans      &trans             &trans       &trans          &trans
+            >;
+        };
+
+        /* Layer 6: US Raise */
+        us_raise_layer {
+            display-name = "US_Raise";
+            bindings = <
+/* TOP */  &trans      &kp LBKT   &kp DQT     &kp RBKT    &kp PIPE       &trans       &trans       &trans       &trans          &trans
+/* MID */  &kp AT      &trans     &kp LPAR    &kp SQT     &kp RPAR       &kp AMPS     &trans       &trans       &trans          &trans    &trans    &trans
+/* BOT */  &trans      &kp BSLH   &kp LBRC    &kp GRAVE   &kp RBRC       &trans       &trans       &trans       &trans          &trans    &trans    &trans
+/* THUMB */            &trans                 &trans      &trans             &trans       &trans           &trans
+            >;
+        };
+
+        /* Layer 7: Adjust (Back + Space hold) */
         adjust_layer {
             display-name = "Adjust";
             bindings = <
-/* TOP */  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3   &none          &kp INS      &kp HOME     &kp PG_UP     &none
-/* MID */  &none       &none           &none         &none           &none         &bt BT_SEL 4 &none        &kp DEL      &kp END   &kp PG_DN &none  &none
+/* TOP */  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3   &tog MAC_BASE  &kp INS      &kp HOME     &kp PG_UP     &none
+/* MID */  &none       &none           &none         &none           &none         &bt BT_SEL 4 &tog US_TOGGLE &kp DEL      &kp END   &kp PG_DN &none  &none
 /* BOT */  &kp F1      &kp F2          &kp F3        &kp F4          &kp F5         &kp F6       &kp F7       &kp F8       &kp F9    &kp F10   &kp F11 &kp F12
 /* THUMB */            &trans                 &trans          &trans          &trans       &trans           &trans
             >;
         };
 
-        /* Layer 4: Mouse (F15 hold) */
+        /* Layer 8: Mouse (F15 hold) */
         mouse_layer {
             display-name = "Mouse";
             bindings = <
@@ -209,7 +268,7 @@
             >;
         };
 
-        /* Layer 5: Gaming (Combo C+V+D+M toggle) */
+        /* Layer 9: Gaming (Combo C+V+D+M toggle) */
         gaming_layer {
             display-name = "Game";
             bindings = <
@@ -220,7 +279,7 @@
             >;
         };
 
-        /* Layer 6: Gaming 2 (Hold Thumb 3 on Game Layer) */
+        /* Layer 10: Gaming 2 (Hold Thumb 3 on Game Layer) */
         gaming2_layer {
             display-name = "Game2";
             bindings = <
