@@ -14,5 +14,5 @@
 &vbatt {
     power-gpios = <&gpio0 14 (GPIO_OPEN_DRAIN | GPIO_ACTIVE_LOW)>;
     output-ohms = <503000>;   // 下側抵抗 (1M+503k 分圧)
-    full-ohms = <1503000>;    // 合計 = 1M + 503k (実電圧＝報告電圧で 4.2V→100%, 3.0V→0%, 3.7V→約58%)
+    full-ohms = <1906000>;    // 満充電時に26%→100%へ補正 (約1.268倍)
 };
