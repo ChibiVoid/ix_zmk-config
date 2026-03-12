@@ -19,5 +19,6 @@
 &vbatt {
     power-gpios = <&gpio0 14 (GPIO_OPEN_DRAIN | GPIO_ACTIVE_LOW)>;
     output-ohms = <503000>; // 記事の補正値
-    full-ohms = <1503000>;
+    /* 満充電で100%になるようスケール補正 (実測23%→100%: 約1.28倍) */
+    full-ohms = <1927000>;
 };
