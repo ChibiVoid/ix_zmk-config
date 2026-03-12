@@ -161,8 +161,8 @@
             bindings = <
 /* TOP */  &kp LGUI    &kp L      &kp U       &kp F       &kp COMMA      &kp DOT      &kp W       &kp R       &kp Y        &none
 /* MID */  &kp Q       &kp E      &kp I       &hm_l LALT A &hm_l LSHIFT O  &kp MINUS    &kp K       &hm_r RSHIFT T &hm_r RALT N  &kp S     &kp H     &kp P
-/* BOT */  &none       &kp Z      &kp X       &kp C       &kp V          &none        &kp G       &kp D       &kp M        &kp J     &kp B     &none
-/* THUMB */            &mt_thumb LCTRL RET    &lt_bspc LOWER BSPC  &kp JP_EISU      &kp JP_KANA  &lt_raise RAISE SPACE  &mt_thumb RCTRL TAB
+/* BOT */  &none       &kp Z      &kp X       &kp C       &kp V          &kp LALT     &kp G       &kp D       &kp M        &kp J     &kp B     &none
+/* THUMB */            &mt_thumb LCTRL RET    &lt_bspc LOWER BSPC  &mt_thumb LSHIFT JP_EISU  &mt_thumb LSHIFT JP_KANA  &lt_raise RAISE SPACE  &mt_thumb RCTRL TAB
             >;
         };
 
