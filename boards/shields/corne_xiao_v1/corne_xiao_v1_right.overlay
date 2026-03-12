@@ -1,5 +1,11 @@
 #include "corne_xiao_v1.dtsi"
 
+/ {
+    chosen {
+        zmk,battery = &vbatt;
+    };
+};
+
 &default_transform {
     col-offset = <6>;
 };
@@ -19,5 +25,5 @@
 &vbatt {
     power-gpios = <&gpio0 14 (GPIO_OPEN_DRAIN | GPIO_ACTIVE_LOW)>;
     output-ohms = <503000>;   // 下側抵抗 (1M+503k 分圧)
-    full-ohms = <1906000>;    // 満充電時に26%→100%へ補正 (約1.268倍)
+    full-ohms = <1503000>;    // 満充電時に26%→100%へ補正 (約1.268倍)
 };
