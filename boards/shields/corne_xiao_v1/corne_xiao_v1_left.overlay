@@ -19,6 +19,7 @@
 
 &vbatt {
     power-gpios = <&gpio0 14 (GPIO_OPEN_DRAIN | GPIO_ACTIVE_LOW)>;
-    output-ohms = <503000>;   // 下側抵抗 (1M+503k 分圧)
-    full-ohms = <1906000>;    // 満充電時に26%→100%へ補正 (約1.268倍)
+    /* XIAO nRF52840 の公式分圧値: 上側 1MΩ, 下側 510kΩ */
+    output-ohms = <510000>;   // 下側抵抗 510kΩ
+    full-ohms = <1510000>;    // 合計 = 1M + 510k (実電圧＝報告電圧)
 };
