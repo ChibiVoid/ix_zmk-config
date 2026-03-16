@@ -27,6 +27,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/pointing.h> // マウスキー用
+#include <behaviors/rgbled_widget.dtsi>
 
 /* レイヤー定義 */
 #define BASE 0
@@ -37,9 +38,8 @@
 #define US_LOWER 5
 #define US_RAISE 6
 #define ADJUST 7
-#define MOUSE 8
-#define GAME 9
-#define GAME2 10
+#define GAME 8
+#define GAME2 9
 
 / {
     /* Home Row Mods の設定 */
@@ -236,25 +236,14 @@
         adjust_layer {
             display-name = "Adjust";
             bindings = <
-/* TOP */  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3   &tog MAC_BASE  &kp INS      &kp HOME     &kp PG_UP     &none
+/* TOP */  &bt BT_CLR  &bt BT_SEL 0    &bt BT_SEL 1  &bt BT_SEL 2    &bt BT_SEL 3   &tog MAC_BASE  &kp INS      &kp HOME     &kp PG_UP     &ind_bat
 /* MID */  &none       &none           &none         &none           &none         &bt BT_SEL 4 &tog US_TOGGLE &kp DEL      &kp END   &kp PG_DN &none  &none
 /* BOT */  &kp F1      &kp F2          &kp F3        &kp F4          &kp F5         &kp F6       &kp F7       &kp F8       &kp F9    &kp F10   &kp F11 &kp F12
 /* THUMB */            &trans                 &trans          &trans          &trans       &trans           &trans
             >;
         };
 
-        /* Layer 8: Mouse (F15 hold) */
-        mouse_layer {
-            display-name = "Mouse";
-            bindings = <
-/* TOP */  &none       &none      &none       &none       &none          &none        &none        &none        &none        &none
-/* MID */  &none       &none      &none       &none       &none          &mkp RCLK    &msc SCRL_UP &none        &none        &none     &none     &none
-/* BOT */  &none       &none      &none       &none       &none          &none        &none        &none        &none        &none     &none     &none
-/* THUMB */            &trans                 &trans      &trans             &trans       &trans           &trans
-            >;
-        };
-
-        /* Layer 9: Gaming (Combo C+V+D+M toggle) */
+        /* Layer 8: Gaming (Combo C+V+D+M toggle) */
         gaming_layer {
             display-name = "Game";
             bindings = <
