@@ -160,7 +160,7 @@
             display-name = "Base";
             bindings = <
 /* TOP */  &kp LGUI    &kp L      &kp U       &kp F       &kp COMMA      &kp DOT      &kp W       &kp R       &kp Y        &none
-/* MID */  &kp Q       &kp E      &kp I       &hm_l LALT A &hm_l LSHIFT O  &kp MINUS    &kp K       &kp T          &kp N          &kp S     &kp H     &kp P
+/* MID */  &kp Q       &kp E      &kp I       &kp A       &kp O          &kp MINUS    &kp K       &kp T          &kp N          &kp S     &kp H     &kp P
 /* BOT */  &none       &kp Z      &kp X       &kp C       &kp V          &kp LALT     &kp G       &kp D       &kp M        &kp J     &kp B     &none
 /* THUMB */            &mt_thumb LCTRL RET    &lt_bspc LOWER BSPC  &mt_thumb LSHIFT JP_EISU  &mt_thumb LSHIFT JP_KANA  &lt_raise RAISE SPACE  &mt_thumb RCTRL TAB
             >;
