@@ -130,7 +130,7 @@
 /* TOP */  &kp LCTRL   &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans
 /* MID */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans    &trans    &trans
 /* BOT */  &trans      &trans     &trans      &trans      &trans         &trans       &trans      &trans      &trans       &trans    &trans    &trans
-/* THUMB */            &mt_thumb LGUI RET     &trans      &trans         &trans       &trans      &mt_thumb RGUI TAB
+/* THUMB */            &mt_thumb LGUI RET     &trans      &mt_thumb LSHIFT LANG2  &mt_thumb LSHIFT LANG1  &trans      &mt_thumb RGUI TAB
             >;
         };
 
