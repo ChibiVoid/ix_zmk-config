@@ -1,1 +1,1 @@
-my keyboard's firmware with zmk
+私の自作キーボード専用のzmkファームウェア
